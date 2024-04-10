@@ -1,18 +1,16 @@
 package com.example.communityoftravellers2.exception;
 
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
+@Data
 public class UserNotFoundException extends RuntimeException{
-    @ExceptionHandler
-    public ResponseEntity<String> handleUserNotFoundException(UserNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-    }
-
-
-    public UserNotFoundException(String message, HttpStatus notFound){
-        super(message);
+    private String message;
+    private String status;
+    public UserNotFoundException(String message, HttpStatus status){
+        this.message = message;
+        this.status = String.valueOf(status);
     }
 
 }
